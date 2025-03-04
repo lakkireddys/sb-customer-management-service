@@ -1,0 +1,51 @@
+services:
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus:v2.45.4
+    ports:
+      - 9090:9090
+    volumes:
+      - ./docker/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+    restart: always
+    extra_hosts:
+      - host.docker.internal:host-gateway
+  grafana:
+    container_name: grafana
+    image: grafana/grafana
+    ports:
+      - 3000:3000
+    depends_on: 
+      - prometheus
+    volumes:
+      - ./docker/datasource.yml:/etc/grafana/provisioning/datasources/datasources.yml  
+  customer_mgmt:
+    build: .
+    depends_on:
+      - mongodb
+    ports:
+      - 9093:9093
+      - 9092:9092 
+    networks:
+      - my-mongo-demo
+  mongodb:
+    image: mongo:7
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin_user
+      - MONGO_INITDB_ROOT_PASSWORD=admin_pwd
+      - MONGO_INITDB_DATABASE=admin
+    volumes:
+      - ./docker/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - mongodb:/data/db
+      - mongodb:/data/config
+    networks:
+      - my-mongo-demo
+networks:
+  my-mongo-demo:
+    driver: bridge
+volumes:
+  mongodb:
+  mongoconfig:        
