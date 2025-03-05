@@ -32,7 +32,7 @@ configure the logback-spring.xml----
 https://dev.splunk.com/enterprise/docs/devtools/java/logging-java/howtouseloggingjava/enableloghttpjava/
 
 
-
+```
 Input Type: Token: 2dd33590-7401-42b7-a784-5bdd0e62ccec 
 Name: my-demo-logging 
 Source name: training-logging 
@@ -40,3 +40,4 @@ Default index: demo_index
 Source Type: log4j 
 App Context: launcher 
 url: localhost:8088
+```
