@@ -20,15 +20,15 @@ services:
       - prometheus
     volumes:
       - ./docker/datasource.yml:/etc/grafana/provisioning/datasources/datasources.yml  
-  customer_mgmt:
-    build: .
-    depends_on:
-      - mongodb
-    ports:
-      - 9093:9093
-      - 9092:9092 
-    networks:
-      - my-mongo-demo
+#  customer_mgmt:
+#    build: .
+#    depends_on:
+#      - mongodb
+#    ports:
+#      - 9093:9093
+#      - 9092:9092
+#    networks:
+#      - my-mongo-demo
   mongodb:
     image: mongo:7
     ports:

@@ -8,6 +8,20 @@ docker run -d -p 8000:8000 -e "SPLUNK_START_ARGS=--accept-license" -e "SPLUNK_PA
 Configure HEC (httpEventCollector)
 https://docs.splunk.com/Documentation/Splunk/9.4.0/Data/UsetheHTTPEventCollector
 
+### Below are the sample parameter to configure the HEC (httpEventCollector)
+```
+Input Type: Token: 2dd33590-7401-42b7-a784-5bdd0e62ccec 
+Name: my-demo-logging 
+Source name: training-logging 
+Default index: demo_index 
+Source Type: log4j 
+App Context: launcher 
+url: localhost:8088
+```
+
+> configure the logback-spring.xml  
+https://dev.splunk.com/enterprise/docs/devtools/java/logging-java/howtouseloggingjava/enableloghttpjava/
+
 ```
   <repositories>
     <repository>
@@ -28,16 +42,4 @@ https://github.com/splunk/splunk-library-javalogging?tab=readme-ov-file
     <scope>runtime</scope>
 </dependency>
 ```
-configure the logback-spring.xml----
-https://dev.splunk.com/enterprise/docs/devtools/java/logging-java/howtouseloggingjava/enableloghttpjava/
 
-
-```
-Input Type: Token: 2dd33590-7401-42b7-a784-5bdd0e62ccec 
-Name: my-demo-logging 
-Source name: training-logging 
-Default index: demo_index 
-Source Type: log4j 
-App Context: launcher 
-url: localhost:8088
-```
