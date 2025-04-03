@@ -1,23 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
     <Appenders>
-        <SplunkHttp
-                name="customer_mgmt"
-                url="http://localhost:8088"
-                token=" 9748abb0-8287-4fb9-bd71-ba72103ddca2"
-                index="customer_mgmt_idx"
-                messageFormat="text"
-                source="cust-splunk"
-                sourceType="log4j"
-                disableCertificateValidation="true">
-            <PatternLayout pattern="%m"/>
-        </SplunkHttp>
+<!--        <SplunkHttp-->
+<!--                name="customer_mgmt"-->
+<!--                url="http://localhost:8088"-->
+<!--                token=" 9748abb0-8287-4fb9-bd71-ba72103ddca2"-->
+<!--                index="customer_mgmt_idx"-->
+<!--                messageFormat="text"-->
+<!--                source="cust-splunk"-->
+<!--                sourceType="log4j"-->
+<!--                disableCertificateValidation="true">-->
+<!--            <PatternLayout pattern="%marker %m"/>-->
+<!--        </SplunkHttp>-->
+        <Console name="Console" >
+            <PatternLayout>
+                <pattern>[%-5level]  [%t] %c{1} - %msg%n</pattern>
+            </PatternLayout>
+        </Console>
     </Appenders>
+<!--    <MarkerFilter marker="Lakki"-->
+<!--                  onMatch="ACCEPT"-->
+<!--                  onMismatch="NEUTRAL"/>-->
 
     <Loggers>
-        <Root level="INFO">
-            <AppenderRef ref="console"/>
-            <AppenderRef ref="customer_mgmt"/>
+        <Root level="info">
+            <AppenderRef ref="Console"/>
         </Root>
+        <Logger name="com.edu" level="INFO" additivity="true">
+            <AppenderRef ref="Console"/>
+        </Logger>
     </Loggers>
 </Configuration>

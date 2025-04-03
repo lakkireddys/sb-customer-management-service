@@ -11,6 +11,8 @@ services:
     restart: always
     extra_hosts:
       - host.docker.internal:host-gateway
+    networks:
+      - my-custom-nw
   grafana:
     container_name: grafana
     image: grafana/grafana
@@ -19,7 +21,9 @@ services:
     depends_on: 
       - prometheus
     volumes:
-      - ./docker/datasource.yml:/etc/grafana/provisioning/datasources/datasources.yml  
+      - ./docker/datasource.yml:/etc/grafana/provisioning/datasources/datasources.yml
+    networks:
+      - my-custom-nw
 #  customer_mgmt:
 #    build: .
 #    depends_on:
@@ -28,7 +32,7 @@ services:
 #      - 9093:9093
 #      - 9092:9092
 #    networks:
-#      - my-mongo-demo
+#      - my-custom-nw
   mongodb:
     image: mongo:7
     ports:
@@ -42,9 +46,9 @@ services:
       - mongodb:/data/db
       - mongodb:/data/config
     networks:
-      - my-mongo-demo
+      - my-custom-nw
 networks:
-  my-mongo-demo:
+  my-custom-nw:
     driver: bridge
 volumes:
   mongodb:

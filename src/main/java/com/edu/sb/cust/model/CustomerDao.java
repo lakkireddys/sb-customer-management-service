@@ -12,7 +12,7 @@ public class CustomerDao {
 
     private String foreName;
     private String surName;
-    private String addressInfo;
+    private int addressId;
     private int age;
     @CreatedDate
     private LocalDate createdTime;
